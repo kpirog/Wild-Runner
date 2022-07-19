@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class GameStateMachine : MonoBehaviour
 {
-    private BaseGameState currentState;
+    [SerializeField] private LevelController levelController;
 
+    private BaseGameState currentState;
+    
     private void Start()
     {
         SwitchState(new MenuState(this));
+        levelController.OnGameStarted();
     }
     public void SwitchState(BaseGameState newState)
     {
@@ -18,6 +21,7 @@ public class GameStateMachine : MonoBehaviour
     private void Update()
     {
         currentState.UpdateState();
+        
     }
     private void OnDestroy()
     {
